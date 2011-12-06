@@ -6,7 +6,7 @@ public $status=1;
 public function  __construct()
 {
 $this->link=mysql_connect("localhost","root","");
-$res=mysql_select_db("chat",$this->link);
+$res=mysql_select_db("chatdb",$this->link);
 if(!$this->link || !$res)
 {
 $this->status=null;
