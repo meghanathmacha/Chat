@@ -2,11 +2,11 @@
 class messageDB extends DB
 {
 
-public function feeduid($uid)
+public function feedmessage($uid_from,$message,$uid_to)
 {
 if($this->link)
 {
-$query="insert into users (uid) values ($uid)";
+$query="insert into messages (uid_from,message,uid_to) values ($uid_from,'$message',$uid_to)";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
@@ -16,7 +16,6 @@ return false;
 }
 return false;
 }
-
 }
 
 ?>
