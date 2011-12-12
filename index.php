@@ -23,18 +23,40 @@ echo "<br/>ONLINE USERS=".$uDB->online_users($uid);
         <script type="text/javascript" src="includes/jquery.js"/></script>
         <script>
      $(document).ready(function(){
+        
+        var refreshId = setInterval(function()
+{
+      $("#chatinit").load("main.php",{'uid':'<?php echo $uid; ?>'},function (data) {
+            
+             $("#chatinit").html(data);
+             if(data) {
+                 partner_uid= data;
+                clearInterval(refreshId);
+             }
+                         
+             
+      });
+      
+       
+}, 100);
+        var refresh1Id = setInterval(function()
+{
+          $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
+            if(data)
+            $('#chatlog').append('<p>'+data+'</p>');
+            });   
+}, 100);
+        
+        
+       $("#message_submit").click(function(){
+         var message= $("#message").val();
+         $('#chatlog').append('<p>You:'+message+'</p>');
+         $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  
+       });
        $("#destroy").click(function(){
         $.post("test.php",{'uid' :'<?php echo $uid; ?>'});  
        });
-       $("#reload").click(function(){
-        
-            $("#chatlog").load("main.php",{'uid':'<?php echo $uid; ?>'});
        
-       });
-       $("#message_submit").click(function(){
-         var message= $("#message").val();
-         $.post("message.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':'<?php echo $partner_uid; ?>'});  
-       });
      });
    </script>
     </head>
@@ -42,29 +64,17 @@ echo "<br/>ONLINE USERS=".$uDB->online_users($uid);
         <div id='MyDiv'>
         <input id='destroy' type='button' value='Destroy Session'></input>
         </div>
+        <div id = 'chatinit'>  
+        </div>
         <div id = 'chatlog'>
-            <input id='reload' type='button' value='Reload'></input>
-            <?php
-            
-            if($uDB->checkstatus($uid)==0){
-               $partner_uid=$uDB->search_partner($uid);
-            if(is_null($partner_uid)){
-            $partner_uid=$uDB->search_partner($uid);
-            echo "<br/>PARTNER ID2=<br/>".$partner_uid;
-                }else {
-            echo "<br/>PARTNER ID=".$partner_uid;} 
-            }
-            echo "<br/>".$partner_uid;
-            $uDB->checkstatus($uid);
-            $uDB->checkstatus($partner_uid);
-            ?>
-        
+        </div>
+        <div id = 'chatitem'>
         </div>
         <div id='Messagebox'>
             <input type='text' id='message' value='start typing here'></input>
             <input id='message_submit' type='button' value='Go'></input>
-        </div>
-        
+</div>
+                
         <script type="text/javascript">
         
      $(window).unload( function (){

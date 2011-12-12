@@ -72,7 +72,6 @@ if(mysql_affected_rows()>0)
 {
 $row=mysql_fetch_row($result);
 $partner_uid=$row['0'];
-echo "PARTNER ID FROM GET FUNCTION ==".$partner_uid;
 return $partner_uid;
 }
 return false;
@@ -104,7 +103,6 @@ $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
 $row=mysql_fetch_row($result);
-echo "<br/>STATUS of ".$uid."=".$row['0'];
 return $row['0'];
 }
 return false;
