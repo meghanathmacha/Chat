@@ -68,7 +68,7 @@ echo "<br/>ONLINE USERS=".$uDB->online_users($uid);
         </div>
         <div id = 'chatlog'>
         </div>
-        <div id = 'chatitem'>
+        <div id = 'chatitem' style="visibility:hidden">
         </div>
         <div id='Messagebox'>
             <input type='text' id='message' value='start typing here'></input>
