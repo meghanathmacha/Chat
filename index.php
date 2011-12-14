@@ -18,6 +18,12 @@ $partner_uid=$uDB->search_partner($uid);
         <title>OMEGLE2<?php echo $uid; ?></title>
         <script type="text/javascript" src="includes/jquery1.js"/></script>
         <link rel="StyleSheet" href="style.css" type="text/css">
+<style>
+#chatlog {
+height: 500px;
+overflow: auto;
+}
+</style>
 	
 <div id="wrapper">
 <header id="header" class="clearfix" role="banner">
@@ -105,8 +111,8 @@ var refreshId = setInterval(function()
         
     <body >
 	<div id="main" class="clearfix">   
-	        <footer class="post-meta"><div id = 'chatlog'>
-        </div></footer>
+	<footer class="post-meta"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;"></div> 
+        </footer>
         <div id = 'chatinit' style="visibility:hidden">  </div>
 <div id='Messagebox'class="clearfix">
 		<aside class="widget"><form class="searchform"><input 
@@ -124,7 +130,10 @@ var refreshId = setInterval(function()
         </div>      
        <div id='MyDiv'>
         <input id='destroy' type='button' value='Destroy Session'></input>
-        </div>     
+        </div>    
+	<head>
+
+</head>
         
     </body>
 </head>
