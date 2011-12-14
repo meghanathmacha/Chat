@@ -15,11 +15,7 @@ $partner_uid=$uDB->search_partner($uid);
     <head>
         <title>OMEGLE2<?php echo $uid; ?></title>
         <script type="text/javascript" src="includes/jquery1.js"/></script>
-        <script>
-        
-         
-
-     $(document).ready(function(){
+            <script> $(document).ready(function(){
 //For mozilla
 /*window.onbeforeunload = confirmExit;
 function confirmExit()
@@ -34,11 +30,7 @@ function confirmExit()
     }
 }*/
 
-      
- 
-        
-    
- var refreshId = setInterval(function()
+var refreshId = setInterval(function()
 {
       $("#chatinit").load("main.php",{'uid':'<?php echo $uid; ?>'},function (data) {
             
@@ -66,7 +58,7 @@ function confirmExit()
             $('#chatlog').append('<p>'+data+'</p>');
             });   
 }, 100);
-        
+      
         
        $("#message_submit").click(function(){
          var message= $("#message").val();
@@ -83,9 +75,21 @@ function confirmExit()
 }); 
      $(window).unload( function (){
          $.post("test.php",{'uid' :'<?php echo $uid; ?>'});
-        });  
+        });
+
+
+   $("form input").keypress(function (e) {
+        if ((e.which && e.which == 32) || (e.keyCode &&e.keyCode == 32)) {
+            var message= $("#message").val();
+	$("#message").attr("value",'');
+         $('#chatlog').append('<p>You:'+message+'</p>');
+         $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  	 
+       }	
+
+});
+  
      });
-   </script>
+</script>
         
     </head>
     <body ><br/>
@@ -100,9 +104,17 @@ function confirmExit()
         </div>
         <div id = 'chatitem' style="visibility:hidden">
         </div>
-        <div id='Messagebox'>
-            <input type='text' id='message' value='start typing here'></input>
-            <input id='message_submit' type='button' value='Go'></input>
+<div id='Messagebox'>
+		<form ><input 
+    type="text" 
+    value="Start typing here"
+    id='message'
+    name="visitors_name" 
+    onblur="if(value=='') value = ''" 
+    onfocus="if(value!='') value = ''"
+ ></input>
+	    
+          <input id='message_submit' type='button' value='Go'></input></form>
 </div>
                 
         
