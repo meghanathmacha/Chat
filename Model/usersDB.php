@@ -79,6 +79,22 @@ return false;
 return false;
 }
 
+public function removepartner($uid)
+{
+if($this->link)
+{
+$query="UPDATE users SET status=0,partner_uid=0 WHERE users.uid=$uid";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+
+return true;
+}
+return false;
+}
+return false;
+}
+
 public function online_users($uid)
 {
 if($this->link)

@@ -46,6 +46,22 @@ return false;
 }
 return false;
 }
+
+public function deletemessage($uid_to)
+{
+if($this->link)
+{
+$query="DELETE FROM messages WHERE messages.uid_from=$uid_to or messages.uid_to=$uid_to";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+$row=mysql_fetch_row($result);
+return $row['0'];
+}
+return false;
+}
+return false;
+}
 }
 
 ?>
