@@ -15,6 +15,7 @@ $partner_uid=$uDB->search_partner($uid);
     <head>
         <title>OMEGLE2<?php echo $uid; ?></title>
         <script type="text/javascript" src="includes/jquery1.js"/></script>
+        <link rel="StyleSheet" href="style.css" type="text/css">
             <script> $(document).ready(function(){
 //For mozilla
 /*window.onbeforeunload = confirmExit;
@@ -93,10 +94,9 @@ var refreshId = setInterval(function()
         
     </head>
     <body ><br/>
-        <div id='MyDiv'>
-        <input id='destroy' type='button' value='Destroy Session'></input>
+        <div id= 'header'>E-StranGer
         </div>
-        <div id = 'chatinit'>  
+        <div id = 'chatinit' style="visibility:hidden">  
         </div>
         <div id = 'status'>  
         </div>
@@ -114,9 +114,11 @@ var refreshId = setInterval(function()
     onfocus="if(value!='') value = ''"
  ></input>
 	    
-          <input id='message_submit' type='button' value='Go'></input></form>
+<input id='message_submit' type='button' value='Go'></input></form>
 </div>
-                
+        <div id='MyDiv'>
+        <input id='destroy' type='button' value='Destroy Session'></input>
+        </div>        
         
     </body>
     
