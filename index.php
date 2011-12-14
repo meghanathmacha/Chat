@@ -110,7 +110,7 @@ var refreshId = setInterval(function()
         <div id = 'chatinit' style="visibility:hidden">  </div>
 <div id='Messagebox'class="clearfix">
 		<aside class="widget"><form class="searchform"><input 
-    type="text" 
+    type="textarea" 
     value="Start typing here"
     id='message'
     name="visitors_name" 
@@ -125,7 +125,7 @@ var refreshId = setInterval(function()
        <div id='MyDiv'>
         <input id='destroy' type='button' value='Destroy Session'></input>
         </div>     
-        
+        </div>
     </body>
 </head>
     
