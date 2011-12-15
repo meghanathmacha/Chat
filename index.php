@@ -17,7 +17,15 @@ $partner_uid=$uDB->search_partner($uid);
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:regular,bold" rel="stylesheet" />
         <title>OMEGLE2<?php echo $uid; ?></title>
         <script type="text/javascript" src="includes/jquery1.js"/></script>
+         <script type="text/javascript" src="includes/jqueryui.js"/></script>
         <link rel="StyleSheet" href="style.css" type="text/css">
+            <script type="text/javascript" src="includes/slimScroll.js"></script>
+<style>
+#chatlog {
+
+overflow: auto;
+}
+</style>
 	
 <div id="wrapper">
 <header id="header" class="clearfix" role="banner">
@@ -68,6 +76,8 @@ var refreshId = setInterval(function()
           $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
             if(data)
             $('#chatlog').append('<p>'+data+'</p>');
+            
+  
             });   
 }, 100);
       
@@ -89,9 +99,20 @@ var refreshId = setInterval(function()
          $.post("test.php",{'uid' :'<?php echo $uid; ?>'});
         });
 
+$('form').submit(function(e){
+    e.preventDefault();
+});
+
+
+ $('#chatlog').slimScroll({
+				  height: '400px',
+				  width: '800px',
+				  start: $('.blah:eq(1)')
+    });
 
    $("form input").keypress(function (e) {
-        if ((e.which && e.which == 32) || (e.keyCode &&e.keyCode == 32)) {
+       
+        if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
             var message= $("#message").val();
 	$("#message").attr("value",'');
          $('#chatlog').append('<p>You:'+message+'</p>');
@@ -105,11 +126,14 @@ var refreshId = setInterval(function()
         
     <body >
 	<div id="main" class="clearfix">   
-	        <footer class="post-meta"><div id = 'chatlog'>
-        </div></footer>
+	<footer class="post-meta"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;"></div> 
+        </footer>
         <div id = 'chatinit' style="visibility:hidden">  </div>
 <div id='Messagebox'class="clearfix">
-		<aside class="widget"><form class="searchform"><input 
+	<aside class="widget">
+            <form class="searchform">
+                <input
+    autopost = "false";
     type="textarea" 
     value="Start typing here"
     id='message'
@@ -117,15 +141,24 @@ var refreshId = setInterval(function()
     onblur="if(value=='') value = ''" 
     onfocus="if(value!='') value = ''"
  ></input>
-<input id='message_submit' type='button' class="btn" value='Go'></input></form></aside></div>
+<input id='message_submit' type='button' class="btn" value='Go'></input>
+            </form></aside></div>
         <div id = 'status'>  
         </div>
         <div id = 'chatitem' style="visibility:hidden">
         </div>      
        <div id='MyDiv'>
         <input id='destroy' type='button' value='Destroy Session'></input>
+
         </div>     
         </div>
+
+        </div>    
+	<head>
+
+</head>
+        
+
     </body>
 </head>
     
