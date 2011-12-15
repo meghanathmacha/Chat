@@ -59,7 +59,14 @@ var refreshId = setInterval(function()
                  partner_uid= data;
                 
              }else {
+                    $("#status").html("Please wait");
+                    
                     $("#chatlog").empty();
+                    $('#chatlog').css({
+				  height: '500px',
+				  width: '800px',
+				  
+    });
                     
                     
              }
@@ -76,15 +83,16 @@ var refreshId = setInterval(function()
           $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
             if(data)
             $('#chatlog').append('<p>'+data+'</p>');
-            
+              $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
   
             });   
 }, 100);
       
-        
+
        $("#message_submit").click(function(){
          var message= $("#message").val();
          $('#chatlog').append('<p>You:'+message+'</p>');
+           $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  
        });
        $("#destroy").click(function(){
@@ -103,19 +111,13 @@ $('form').submit(function(e){
     e.preventDefault();
 });
 
-
- $('#chatlog').slimScroll({
-				  height: '400px',
-				  width: '800px',
-				  start: $('.blah:eq(1)')
-    });
-
-   $("form input").keypress(function (e) {
+   $("input").keypress(function (e) {
        
         if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
             var message= $("#message").val();
 	$("#message").attr("value",'');
          $('#chatlog').append('<p>You:'+message+'</p>');
+          $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  	 
        }	
 
@@ -126,7 +128,8 @@ $('form').submit(function(e){
         
     <body >
 	<div id="main" class="clearfix">   
-	<footer class="post-meta"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;"></div> 
+	<footer class="post-meta">
+            <div id = "status" style="width:600px;height:500px;"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;"></div></div>
         </footer>
         <div id = 'chatinit' style="visibility:hidden">  </div>
 <div id='Messagebox'class="clearfix">
@@ -143,8 +146,7 @@ $('form').submit(function(e){
  ></input>
 <input id='message_submit' type='button' class="btn" value='Go'></input>
             </form></aside></div>
-        <div id = 'status'>  
-        </div>
+        
         <div id = 'chatitem' style="visibility:hidden">
         </div>      
        <div id='MyDiv'>
@@ -163,3 +165,4 @@ $('form').submit(function(e){
 </head>
     
 </html>
+
