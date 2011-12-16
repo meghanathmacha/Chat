@@ -59,7 +59,7 @@ var refreshId = setInterval(function()
                  partner_uid= data;
                 
              }else {
-                    $("#status").html("Please wait");
+                    
                     
                     $("#chatlog").empty();
                     $('#chatlog').css({
@@ -81,10 +81,10 @@ var refreshId = setInterval(function()
         var refresh1Id = setInterval(function()
 {
           $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
-            if(data)
+            if(data){
             $('#chatlog').append('<p>'+data+'</p>');
               $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
-  
+            }
             });   
 }, 100);
       
@@ -106,6 +106,12 @@ var refreshId = setInterval(function()
      $(window).unload( function (){
          $.post("test.php",{'uid' :'<?php echo $uid; ?>'});
         });
+
+$('#chatlog').slimscroll({
+				  height : '500px',
+                                  width :'600px',
+				  railVisible: true
+			  });
 
 $('form').submit(function(e){
     e.preventDefault();
@@ -165,4 +171,3 @@ $('form').submit(function(e){
 </head>
     
 </html>
-
