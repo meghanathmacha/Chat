@@ -141,7 +141,11 @@ $('form').submit(function(e){
 <div id='Messagebox'class="clearfix">
 	<aside class="widget">
             <form class="searchform">
-                <input
+                <div id='MyDiv'>
+        <input id='destroy' type='button' value='Destroy Session'></input>
+
+        </div>
+              <!--  <input
     autopost = "false";
     type="textarea" 
     value="Start typing here"
@@ -149,16 +153,14 @@ $('form').submit(function(e){
     name="visitors_name" 
     onblur="if(value=='') value = ''" 
     onfocus="if(value!='') value = ''"
- ></input>
-<input id='message_submit' type='button' class="btn" value='Go'></input>
+ ></input>-->
+ <div><p><label for="f5"></label><textarea id="message" cols="70" rows="5" ></textarea></p></div>
+<div><input id='message_submit' type='button' class="btn" value='Go'></input></div>
             </form></aside></div>
         
         <div id = 'chatitem' style="visibility:hidden">
         </div>      
-       <div id='MyDiv'>
-        <input id='destroy' type='button' value='Destroy Session'></input>
-
-        </div>     
+            
         </div>
 
         </div>    
