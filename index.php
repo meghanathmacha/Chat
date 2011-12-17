@@ -8,8 +8,12 @@ if($uDB->checkstatus($uid)==0){
 $partner_uid=$uDB->search_partner($uid);
 if(is_null($partner_uid)){
 $partner_uid=$uDB->search_partner($uid);    
+$online_users_no=$uDB->online_users($uid);
+$status_user=$uDB->checkstatus($uid);
 }
 }
+ 
+
 ?>
 <html>
     <head>
@@ -91,9 +95,10 @@ var refreshId = setInterval(function()
 
        $("#message_submit").click(function(){
          var message= $("#message").val();
+if($("#message").val()!="")  {
          $('#chatlog').append('<p>You:'+message+'</p>');
            $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
-         $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  
+         $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid}); } 
        });
        $("#destroy").click(function(){
         $.post("disconnect.php",{'uid' :'<?php echo $uid; ?>','partner_uid':partner_uid});  
@@ -117,31 +122,43 @@ $('form').submit(function(e){
     e.preventDefault();
 });
 
-   $("input").keypress(function (e) {
-       
+ $("textarea").keypress(function (e) {       
         if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
-            var message= $("#message").val();
-	$("#message").attr("value",'');
+            var message= $("#message").val();	
+$("#message").attr("value",'');
          $('#chatlog').append('<p>You:'+message+'</p>');
           $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  	 
        }	
-
 });
   
      });
 </script>
         
     <body >
+<div> <!-- float container -->
+
+  <div style="float:left; width:60%;"><p></p></div>
+	<p position:relative;>     
+<?php 
+$status_user=$uDB->checkstatus($uid);
+if($status_user==1)
+echo "You are now connected to a Stranger Say Hi !";
+else
+echo "Please wait while we connect you to a stranger !"; ?></p> 
+
+</div>
 	<div id="main" class="clearfix">   
 	<footer class="post-meta">
-            <div id = "status" style="width:600px;height:500px;"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;"></div></div>
+            <div id = "status" style="width:600px;height:500px;"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;">
+    </div></div>
         </footer>
         <div id = 'chatinit' style="visibility:hidden">  </div>
 <div id='Messagebox'class="clearfix">
 	<aside class="widget">
             <form class="searchform">
-                <div id='MyDiv'>
+                <div id='MyDiv';position="absolute";
+right="50px";>
         <input id='destroy' type='button' value='Destroy Session'></input>
 
         </div>
@@ -154,7 +171,16 @@ $('form').submit(function(e){
     onblur="if(value=='') value = ''" 
     onfocus="if(value!='') value = ''"
  ></input>-->
- <div><p><label for="f5"></label><textarea id="message" cols="70" rows="5" ></textarea></p></div>
+ <div><p><label for="f5"></label><textarea
+    autopost = "false";
+    type="textarea" 
+    value="Start typing here"
+    id='message'
+    name="visitors_name"
+	style="width: 610px; height:75px;overflow:auto;"
+    onblur="if(value=='') value = ''" 
+    onfocus="if(value!='') value = ''"
+ ></textarea></p></div>
 <div><input id='message_submit' type='button' class="btn" value='Go'></input></div>
             </form></aside></div>
         
