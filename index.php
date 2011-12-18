@@ -19,18 +19,11 @@ $status_user=$uDB->checkstatus($uid);
     <head>
 	  <link href="style.css" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif:regular,bold" rel="stylesheet" />
-        <title>OMEGLE2<?php echo $uid; ?></title>
+        <title>E-Strange <?php echo $uid; ?></title>
         <script type="text/javascript" src="includes/jquery1.js"/></script>
          <script type="text/javascript" src="includes/jqueryui.js"/></script>
         <link rel="StyleSheet" href="style.css" type="text/css">
-            <script type="text/javascript" src="includes/slimScroll.js"></script>
-<style>
-#chatlog {
-
-overflow: auto;
-}
-</style>
-	
+            <script type="text/javascript" src="includes/slimScroll.js"></script>	
 <div id="wrapper">
 <header id="header" class="clearfix" role="banner">
     
@@ -67,8 +60,8 @@ var refreshId = setInterval(function()
                     
                     $("#chatlog").empty();
                     $('#chatlog').css({
-				  height: '500px',
-				  width: '800px',
+				  height: '350px',
+				  width: '920px',
 				  
     });
                     
@@ -86,7 +79,7 @@ var refreshId = setInterval(function()
 {
           $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
             if(data){
-            $('#chatlog').append('<p>'+data+'</p>');
+            $('#chatlog').append('<p>'+data+'</p><hr/>');
               $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
             }
             });   
@@ -100,7 +93,7 @@ if($("#message").val()!="")  {
            $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid}); } 
        });
-       $("#destroy").click(function(){
+       $("#disconnect").click(function(){
         $.post("disconnect.php",{'uid' :'<?php echo $uid; ?>','partner_uid':partner_uid});  
        });
        $(window).bind('beforeunload', function(event) {
@@ -113,8 +106,8 @@ if($("#message").val()!="")  {
         });
 
 $('#chatlog').slimscroll({
-				  height : '500px',
-                                  width :'600px',
+				  height : '350px',
+                                  width :'920px',
 				  railVisible: true
 			  });
 
@@ -136,33 +129,35 @@ $("#message").attr("value",'');
 </script>
         
     <body >
-<div> <!-- float container -->
 
-  <div style="float:left; width:60%;"><p></p></div>
-	<p position:relative;>     
-<?php 
-$status_user=$uDB->checkstatus($uid);
-if($status_user==1)
-echo "You are now connected to a Stranger Say Hi !";
-else
-echo "Please wait while we connect you to a stranger !"; ?></p> 
-
-</div>
 	<div id="main" class="clearfix">   
-	<footer class="post-meta">
-            <div id = "status" style="width:600px;height:500px;"><div id = 'chatlog' style="width:600px;height:500px;overflow:auto;">
-    </div></div>
-        </footer>
-        <div id = 'chatinit' style="visibility:hidden">  </div>
-<div id='Messagebox'class="clearfix">
-	<aside class="widget">
-            <form class="searchform">
-                <div id='MyDiv';position="absolute";
-right="50px";>
-        <input id='destroy' type='button' value='Destroy Session'></input>
+	
+            <div id = "status" style="width:945px;height:415px;">
+    <div id= 'statusbar' style="width:auto; height:30px;">LOOOOOOOOL</div>
+    <div id = 'chatlog' >
+    </div>
+     <div id = 'chatitem' style="visibility:hidden">  </div>  
+        <div id = 'chatinit' style="visibility:hidden">  </div> 
+            </div>
+<br/>
+<div id='Messagebox' >
+    <table><tr><td>
+    <div id='disconnect'>
+        <input id='disconnect' type='button' class="butn" value='Disconnect'></input>
 
-        </div>
-              <!--  <input
+        </div></td><td>
+    <div id='textbox'><textarea
+    autopost = "false";
+    type="textarea" 
+    value="Start typing here"
+    id='message'
+    name="visitors_name"
+	style="width: 620px; height:56px;overflow:auto;"
+    onblur="if(value=='') value = ''" 
+    onfocus="if(value!='') value = ''"
+ ></textarea></div></td><td>
+    <div id='send'><input id='message_submit' type='button' class="butn" value='Go'></input></div> </td></tr></table>
+ <!--  <input
     autopost = "false";
     type="textarea" 
     value="Start typing here"
@@ -171,31 +166,11 @@ right="50px";>
     onblur="if(value=='') value = ''" 
     onfocus="if(value!='') value = ''"
  ></input>-->
- <div><p><label for="f5"></label><textarea
-    autopost = "false";
-    type="textarea" 
-    value="Start typing here"
-    id='message'
-    name="visitors_name"
-	style="width: 610px; height:75px;overflow:auto;"
-    onblur="if(value=='') value = ''" 
-    onfocus="if(value!='') value = ''"
- ></textarea></p></div>
-<div><input id='message_submit' type='button' class="btn" value='Go'></input></div>
-            </form></aside></div>
-        
-        <div id = 'chatitem' style="visibility:hidden">
-        </div>      
-            
-        </div>
-
-        </div>    
-	<head>
-
+</div>
+</div>
+</div>    
+<head>
 </head>
-        
-
-    </body>
+</body>
 </head>
-    
 </html>
