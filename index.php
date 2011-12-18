@@ -54,9 +54,10 @@ var refreshId = setInterval(function()
              $("#chatinit").html(data);
              if(data) {
                  partner_uid= data;
-                
+                $('#statusbar').html('<p>You are connected to a random Kgpian.Enjoy chatting</p>');
              }else {
-                    
+                    $('#statusbar').empty();
+                    $('#statusbar').html('<p>Please wait while you are being connected...</p>');
                     
                     $("#chatlog").empty();
                     $('#chatlog').css({
@@ -79,7 +80,8 @@ var refreshId = setInterval(function()
 {
           $("#chatitem").load("getmessage.php",{'partner_uid':partner_uid},function (data) {
             if(data){
-            $('#chatlog').append('<p>'+data+'</p><hr/>');
+                
+            $('#chatlog').append('<div><p>'+data+'</p></div><hr/>');
               $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
             }
             });   
@@ -89,7 +91,7 @@ var refreshId = setInterval(function()
        $("#message_submit").click(function(){
          var message= $("#message").val();
 if($("#message").val()!="")  {
-         $('#chatlog').append('<p>You:'+message+'</p>');
+         $('#chatlog').append('<div><p><b>You</b> :'+message+'</p></div><hr/>');
            $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid}); } 
        });
@@ -119,7 +121,7 @@ $('form').submit(function(e){
         if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
             var message= $("#message").val();	
 $("#message").attr("value",'');
-         $('#chatlog').append('<p>You:'+message+'</p>');
+         $('#chatlog').append('<div><p><b>You</b> :'+message+'</p></div><hr/>');
           $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
          $.post("feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  	 
        }	
@@ -133,7 +135,7 @@ $("#message").attr("value",'');
 	<div id="main" class="clearfix">   
 	
             <div id = "status" style="width:945px;height:415px;">
-    <div id= 'statusbar' style="width:auto; height:30px;">LOOOOOOOOL</div>
+    <div id= 'statusbar' style="width:auto; height:30px;"></div>
     <div id = 'chatlog' >
     </div>
      <div id = 'chatitem' style="visibility:hidden">  </div>  

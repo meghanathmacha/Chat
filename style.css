@@ -511,8 +511,27 @@ hr {
 #menu .current > a,
 .btn,
 .more-link,
-input[type=submit],
+input[type=submit]
 legend {
+	background: #fa4fab; /* Fallback */
+	background: -moz-linear-gradient(top, #fa4fab 0%, #f7387c 100%); /* FF 3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa4fab), color-stop(100%,#f7387c)); /* Chrome, Safari 4+ */
+	background: -webkit-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* Chrome 10+, Safari 5.1+ */
+	background: -o-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* IE10+ */
+	background: linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* W3C */
+	
+	color: #fff;
+	border-color: transparent;
+	border-radius: 10px 0 10px 0;
+	font-weight: bold;
+	padding: 14px 20px;
+	text-shadow: 0 1px 0 #AC0649;
+	-webkit-transition: all 100ms linear;
+	/*-moz-transition: all 100ms linear;*/
+	transition: all 100ms linear;
+}
+.lite {
 	background: #fa4fab; /* Fallback */
 	background: -moz-linear-gradient(top, #fa4fab 0%, #f7387c 100%); /* FF 3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa4fab), color-stop(100%,#f7387c)); /* Chrome, Safari 4+ */
@@ -551,8 +570,9 @@ legend {
 	/*-moz-transition: all 100ms linear;*/
 	transition: all 100ms linear;
 }
-#menu .current > a:hover,
+#menu .current > a:hover,.lite:hover,
 .btn:hover,
+.butn:hover,
 .more-link:hover,
 input[type=submit]:hover {
 	border-radius: 0 10px 0 10px;
@@ -853,7 +873,11 @@ legend {
 	font: bold 14px 'Droid Serif', Georgia, serif;
 	padding: 10px 12px;	
 }
-
+.lite {
+	width :100px;
+	font: bold 14px 'Droid Serif', Georgia, serif;
+	padding: 10px 12px;	
+}
 /* Input fields */
 input,
 textarea {
