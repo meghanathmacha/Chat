@@ -421,6 +421,10 @@ hr {
 }
 #status {
 	background : white;
+	background-image:url('back.jpg');
+	background-repeat: no-repeat;
+	background-position : center;
+	opacity : 1;
 	border-radius: 5px 5px 10px 10px;
 	width: 900px;
 	height:450px;
