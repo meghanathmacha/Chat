@@ -1,8 +1,6 @@
 <?php
 require("Model/initDB.php");
-require("Model/mainchatDB.php");
-$time=time();
-$mcDB = new mainchatDB();
+$time= time();
 ?>
 <html>
     <head>
@@ -22,16 +20,21 @@ $mcDB = new mainchatDB();
     </header> 
 
             <script> $(document).ready(function(){
-		var refreshId = setInterval(function()
+                alert('hi');
+		
+		
+		var refresh1Id = setInterval(function()
 {
-	    
+		    time = '<?php echo $time; ?>';
+		    var nick = 'manoj';
           $("#chatitem").load("includes/mainchat/getmainchat.php",{'nick':nick,'time':time},function (data) {
             if(data){
+                
             $('#chatlog').append('<div><p>'+data+'</p></div>');
             }
-            });
-
+            });   
 }, 100);
+		
                 $("#nick_submit").click(function(){
          var nickname= $("#nick").val();
 if(nickname)  {
