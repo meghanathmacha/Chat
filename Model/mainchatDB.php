@@ -26,6 +26,7 @@ $query="select nick,message from mainchat where time>$time";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
+echo mysql_affected_rows()."<br/>";
 while($row=mysql_fetch_row($result)){
 if(!($row['0']=="$nick")){
 $message = $message.$row['0'].":".$row['1']."<br/>";

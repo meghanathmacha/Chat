@@ -1,6 +1,8 @@
 <?php
 require("Model/initDB.php");
+require("Model/mainchatDB.php");
 $time= time();
+$mcDB= new mainchatDB();
 ?>
 <html>
     <head>
@@ -20,21 +22,23 @@ $time= time();
     </header> 
 
             <script> $(document).ready(function(){
-                alert('hi');
+             
 		
 		
 		var refresh1Id = setInterval(function()
 {
-		    time = '<?php echo $time; ?>';
+		 var  time = $("#time").html();
 		    var nick = 'manoj';
           $("#chatitem").load("includes/mainchat/getmainchat.php",{'nick':nick,'time':time},function (data) {
             if(data){
-                
             $('#chatlog').append('<div><p>'+data+'</p></div>');
-            }
+            $('#time').load('includes/mainchat/gettime.php');
+	    }
             });   
 }, 100);
-		
+		$("#time_submit").click(function(){
+		    
+		 });    
                 $("#nick_submit").click(function(){
          var nickname= $("#nick").val();
 if(nickname)  {
@@ -57,13 +61,14 @@ if(message)  {
     <body >
 
 	<div id="main" class="clearfix">   
-	
+	<div id= 'time' ><?php $mcDB->gettime(); ?></div><div><input id='time_submit' type='button' class="butn" value='time'></input></div>
             <div id = "status" style="width:945px;height:415px;">
     <div id= 'statusbar' style="width:auto; height:30px;"></div>
     <div id = 'chatlog' >
     </div>
      <div id = 'chatitem' style="visibility:hidden">  </div>  
-        <div id = 'chatinit' style="visibility:hidden">  </div> 
+        <div id = 'chatinit' style="visibility:hidden">  </div>
+	
             </div>
 <br/>
 <div id='Messagebox' >

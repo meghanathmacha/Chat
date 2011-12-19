@@ -4,10 +4,10 @@ require("../../Model/mainchatDB.php");
 $nick = $_REQUEST["nick"];
 $time = $_REQUEST["time"];
 $mcDB= new mainchatDB();
-if($mcDB->getmainchat($nick,$time)){
-  $message = $mcDB->getmainchat($nick,$time);
+echo $mcDB->getmainchat($nick,$time);
+/*if($message){
   echo $message;
 }else {
     return false;
-}
+}*/
 ?>
