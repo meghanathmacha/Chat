@@ -28,7 +28,7 @@ $mcDB= new mainchatDB();
 		var refresh1Id = setInterval(function()
 {
 		 var  time = $("#time").html();
-		    var nick = 'manoj';
+		 
           $("#chatitem").load("includes/mainchat/getmainchat.php",{'nick':nick,'time':time},function (data) {
             if(data){
             $('#chatlog').append('<div><p>'+data+'</p></div>');
