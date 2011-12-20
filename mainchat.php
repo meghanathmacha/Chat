@@ -29,13 +29,13 @@ $mcDB= new mainchatDB();
 {
 		 var  time = $("#time").html();
 		 
-          $("#chatitem").load("includes/mainchat/getmainchat.php",{'nick':nick,'time':time},function (data) {
+          $("#chatitem").load("includes/mainchat/getmainchat.php",{'time':time},function (data) {
             if(data){
             $('#chatlog').append('<div><p>'+data+'</p></div>');
             $('#time').load('includes/mainchat/gettime.php');
 	    }
             });   
-}, 100);
+}, 300);
 		$("#time_submit").click(function(){
 		    
 		 });    
@@ -50,7 +50,6 @@ if(nickname)  {
 $("#message_submit").click(function(){
          var message= $("#message").val();
 if(message)  {
-         $('#chatlog').append('<div><p><b>'+nick+'</b> :'+message+'</p></div>');
          $.post("includes/mainchat/feedmainchat.php",{'nick' : nick,'message':message});
         } 
        });   
@@ -61,7 +60,7 @@ if(message)  {
     <body >
 
 	<div id="main" class="clearfix">   
-	<div id= 'time' ><?php $mcDB->gettime(); ?></div><div><input id='time_submit' type='button' class="butn" value='time'></input></div>
+	<div id= 'time' ><?php $mcDB->gettime(); ?></div>
             <div id = "status" style="width:945px;height:415px;">
     <div id= 'statusbar' style="width:auto; height:30px;"></div>
     <div id = 'chatlog' >
