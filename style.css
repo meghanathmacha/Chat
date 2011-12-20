@@ -574,9 +574,30 @@ legend {
 	/*-moz-transition: all 100ms linear;*/
 	transition: all 100ms linear;
 }
+.buton {
+	background: #fa4fab; /* Fallback */
+	background: -moz-linear-gradient(top, #fa4fab 0%, #f7387c 100%); /* FF 3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fa4fab), color-stop(100%,#f7387c)); /* Chrome, Safari 4+ */
+	background: -webkit-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* Chrome 10+, Safari 5.1+ */
+	background: -o-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* IE10+ */
+	background: linear-gradient(top, #fa4fab 0%,#f7387c 100%); /* W3C */
+	height: 38px;
+	width :170px;
+	color: #fff;
+	border-color: transparent;
+	border-radius: 10px 0 10px 0;
+	font-weight: bold;
+	padding: 7px 10px;
+	text-shadow: 0 1px 0 #AC0649;
+	-webkit-transition: all 100ms linear;
+	/*-moz-transition: all 100ms linear;*/
+	transition: all 100ms linear;
+}
 #menu .current > a:hover,.lite:hover,
 .btn:hover,
 .butn:hover,
+.buton:hover,
 .more-link:hover,
 input[type=submit]:hover {
 	border-radius: 0 10px 0 10px;

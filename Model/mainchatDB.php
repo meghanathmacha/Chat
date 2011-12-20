@@ -2,12 +2,12 @@
 class mainchatDB extends DB
 {
 
-public function feedmainchat($nick,$message)
+public function feedmainchat($nick,$message,$id)
 {
 if($this->link)
 {
 $time=time();
-$query="insert into mainchat (nick,message,time) values ('$nick','$message',$time)";
+$query="insert into mainchat (nick,message,time,id) values ('$nick','$message',$time,$id)";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
@@ -17,12 +17,12 @@ return false;
 }
 return false;
 }
-public function getmainchat($time)
+public function getmainchat($time,$id)
 {
 if($this->link)
 {
 global $message;
-$query="select nick,message from mainchat where time>$time";
+$query="select nick,message from mainchat where id=$id and time>$time";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
