@@ -5,8 +5,10 @@ require("../../Model/messageDB.php");
 $uid_to=$_REQUEST["partner_uid"];
 $uDB= new usersDB();
 $mDB= new messageDB();
-if($mDB->getmessage($uid_to)){
- echo  "<strong>Stranger</strong>:".$mDB->getmessage($uid_to);
+$message=$mDB->getmessage($uid_to);
+$new_message=$mDB->emoticons($message);
+if($new_message){
+ echo  "<strong>Stranger</strong>:".$new_message;
  $mDB->setstatus_1($uid_to);
 }else { return false;}
 ?>

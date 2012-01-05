@@ -7,5 +7,6 @@ $partner_uid=$_REQUEST["partner_uid"];
 $uDB= new usersDB();
 $mDB= new messageDB();
 $uDB->removepartner($uid);
+sleep(1);
 $uDB->removepartner($partner_uid);
 ?>

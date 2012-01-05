@@ -2,7 +2,9 @@
 require_once("includes/one-one/session.php");
 require("Model/initDB.php");
 require("Model/usersDB.php");
+require("Model/messageDB.php");
 $uDB = new usersDB();
+$mDB= new messageDB();
 $uDB->feeduid($uid);
 if($uDB->checkstatus($uid)==0){
 $partner_uid=$uDB->search_partner($uid);
@@ -12,8 +14,6 @@ $online_users_no=$uDB->online_users($uid);
 $status_user=$uDB->checkstatus($uid);
 }
 }
- 
-
 ?>
 <html>
     <head>
@@ -56,53 +56,51 @@ var refreshId = setInterval(function()
                  partner_uid= data;
                 $('#statusbar').html('<p>You are connected to a random Kgpian.Enjoy chatting</p>');
              }else {
-                    $('#statusbar').empty();
+		   
+		    $.post("includes/one-one/searchpartner.php",{'uid' :'<?php echo $uid; ?>'});
+		    $('#statusbar').empty();
                     $('#statusbar').html('<p>Please wait while you are being connected...</p>');
-                    
                     $("#chatlog").empty();
                     $('#chatlog').css({
 				  height: '350px',
-				  width: '920px',
-				  
-    });
-                    
-                    
-             }
-             
-      });
-      
-       
+				  width: '920px',			  
+    });      
+             }    
+      });   
 }, 100);
     
-   
-        
         var refresh1Id = setInterval(function()
 {
           $("#chatitem").load("includes/one-one/getmessage.php",{'partner_uid':partner_uid},function (data) {
-            if(data){
-                
+            if(data){ 
             $('#chatlog').append('<div><p>'+data+'</p></div><hr/>');
               $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
             }
             });   
 }, 100);
-      
-
+	
        $("#message_submit").click(function(){
          var message= $("#message").val();
-if($("#message").val()!="")  {
-         $('#chatlog').append('<div><p><b>You</b> :'+message+'</p></div><hr/>');
+	 
+	if($("#message").val()!="")  {     
+	 $('#chatlog').append('<div><p><b>You</b> :'+message+'</p></div><hr/>');
            $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
-         $.post("includes/one-one/feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid}); } 
+         $.post("includes/one-one/feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});
+	 
+	 }
+	
        });
+       
        $("#disconnect").click(function(){
         $.post("includes/one-one/disconnect.php",{'uid' :'<?php echo $uid; ?>','partner_uid':partner_uid});  
        });
+       
        $(window).bind('beforeunload', function(event) {
     $.post("includes/one-one/unload.php",{'uid' :'<?php echo $uid; ?>','partner_uid':partner_uid});
     event.returnValue = "What are you thinking??Please Leave the page :P";
     return event.returnValue;
-}); 
+});
+       
      $(window).unload( function (){
          $.post("includes/one-one/test.php",{'uid' :'<?php echo $uid; ?>'});
         });
@@ -117,7 +115,7 @@ $('form').submit(function(e){
     e.preventDefault();
 });
 
- $("textarea").keypress(function (e) {       
+  $("textarea").keypress(function (e) {       
         if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
             var message= $("#message").val();	
 $("#message").attr("value",'');
