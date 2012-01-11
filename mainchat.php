@@ -3,7 +3,6 @@ require("Model/initDB.php");
 require("Model/mainchatDB.php");
 $time= time();
 $mcDB= new mainchatDB();
-$id=$_GET["id"];
 ?>
 <html>
     <head>
@@ -18,36 +17,40 @@ $id=$_GET["id"];
 <header id="header" class="clearfix" role="banner">
     
         <hgroup>
-            <h1 id="site-title"><a href="mainchat.php?id=0">E Strange Main Chat</a></h1>
+            <h1 id="site-title"><a href="index.php">E Strange Main Chat</a></h1>
         </hgroup>   
     </header> 
 
             <script> $(document).ready(function(){
              
-		id='<?php echo $id; ?>';
+		
 		
 		var refresh1Id = setInterval(function()
 {
 		 var  time = $("#time").html();
 		 
-          $("#chatitem").load("includes/mainchat/getmainchat.php",{'time':time,'id':id},function (data) {
+          $("#chatitem").load("includes/mainchat/getmainchat.php",{'time':time},function (data) {
             if(data){
             $('#chatlog').append('<div><p>'+data+'</p></div>');
             $('#time').load('includes/mainchat/gettime.php');
 	    }
             });   
-}, 1000);    
+}, 300);
+		$("#time_submit").click(function(){
+		    
+		 });    
                 $("#nick_submit").click(function(){
          var nickname= $("#nick").val();
 if(nickname)  {
     nick = nickname;
+         $('#nickbox').css({visibility:'hidden',});
          } 
        });
                 
 $("#message_submit").click(function(){
          var message= $("#message").val();
 if(message)  {
-         $.post("includes/mainchat/feedmainchat.php",{'nick' : nick,'message':message,'id':id});
+         $.post("includes/mainchat/feedmainchat.php",{'nick' : nick,'message':message});
         } 
        });   
 
@@ -69,16 +72,10 @@ if(message)  {
 <br/>
 <div id='Messagebox' >
     <table><tr><td>
-    <div id= 'nickbox'><input
-    autopost = "false";
-    type="textarea" 
-    value="Start typing here"
-    id='nick'
-    name="visitors_name" 
-    onblur="if(value=='') value = ''" 
-    onfocus="if(value!='') value = ''"
- ></input><div id='go'><input id='nick_submit' type='button' class="buton" value='Set My Nick'></input></div> </div>
-    </td><td>
+    <div id='disconnect'>
+        <input id='disconnect' type='button' class="butn" value='Disconnect'></input>
+
+        </div></td><td>
     <div id='textbox'><textarea
     autopost = "false";
     type="textarea" 
@@ -90,7 +87,15 @@ if(message)  {
     onfocus="if(value!='') value = ''"
  ></textarea></div></td><td>
     <div id='send'><input id='message_submit' type='button' class="butn" value='Go'></input></div> </td></tr></table>
- 
+ <div id= 'nickbox'><input
+    autopost = "false";
+    type="textarea" 
+    value="Start typing here"
+    id='nick'
+    name="visitors_name" 
+    onblur="if(value=='') value = ''" 
+    onfocus="if(value!='') value = ''"
+ ></input><div id='go'><input id='nick_submit' type='button' class="butn" value='Thats it.'></input></div> </div>
 </div>
 </div>
 </div>    

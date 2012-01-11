@@ -6,7 +6,22 @@ public function feeduid($uid)
 {
 if($this->link)
 {
-$query="insert into users (uid) values ($uid)";
+$query="insert into users (uid,statistics) values ($uid,'0,0,0,0')";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+return true;
+}
+return false;
+}
+return false;
+}
+public function updatestatistics($uid,$statistics)
+{
+   
+if($this->link)
+{
+$query="UPDATE users SET statistics='$statistics' WHERE users.uid=$uid";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
@@ -17,11 +32,20 @@ return false;
 return false;
 }
 
+<<<<<<< HEAD
 public function gender($uid,$gender)
 {
 if($this->link)
 {
 $query="UPDATE users SET gender=$gender WHERE users.uid=$uid";
+=======
+public function typing($uid,$status)
+{
+    
+if($this->link)
+{
+$query="UPDATE users SET typing=$status WHERE users.uid=$uid";
+>>>>>>> cbf772c3e630511cd80c9e85336f98881583248a
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
@@ -31,6 +55,7 @@ return false;
 }
 return false;
 }
+<<<<<<< HEAD
 public function getgender($uid)
 {
 if($this->link)
@@ -43,6 +68,21 @@ if(mysql_affected_rows()>0)
    $row=mysql_fetch_row($result);
    
 return $row['0'];
+=======
+
+public function getstatistics($uid)
+{
+   // echo $statistics; 
+if($this->link)
+{
+$query="SELECT statistics FROM users WHERE uid=$uid";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+$row=mysql_fetch_row($result);
+$statistics = explode(",", $row[0]);
+return $statistics;
+>>>>>>> cbf772c3e630511cd80c9e85336f98881583248a
 }
 return false;
 }
