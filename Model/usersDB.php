@@ -6,7 +6,22 @@ public function feeduid($uid)
 {
 if($this->link)
 {
-$query="insert into users (uid) values ($uid)";
+$query="insert into users (uid,statistics) values ($uid,'0,0,0,0')";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+return true;
+}
+return false;
+}
+return false;
+}
+public function updatestatistics($uid,$statistics)
+{
+   
+if($this->link)
+{
+$query="UPDATE users SET statistics='$statistics' WHERE users.uid=$uid";
 $result=mysql_query($query,$this->link);
 if(mysql_affected_rows()>0)
 {
@@ -17,6 +32,39 @@ return false;
 return false;
 }
 
+public function typing($uid,$status)
+{
+    
+if($this->link)
+{
+$query="UPDATE users SET typing=$status WHERE users.uid=$uid";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+return true;
+}
+return false;
+}
+return false;
+}
+
+public function getstatistics($uid)
+{
+   // echo $statistics; 
+if($this->link)
+{
+$query="SELECT statistics FROM users WHERE uid=$uid";
+$result=mysql_query($query,$this->link);
+if(mysql_affected_rows()>0)
+{
+$row=mysql_fetch_row($result);
+$statistics = explode(",", $row[0]);
+return $statistics;
+}
+return false;
+}
+return false;
+}
 public function deleteuid($uid)
 {
 if($this->link)

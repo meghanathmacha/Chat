@@ -117,13 +117,16 @@ $('form').submit(function(e){
     e.preventDefault();
 });
 
- $("textarea").keypress(function (e) {       
+ $("textarea").keypress(function (e) {
+	   var typing = '<?php echo $uDB->typing($uid,1); ?>';
+    
         if ((e.which && e.which == 13) || (e.keyCode &&e.keyCode == 13)) {
             var message= $("#message").val();	
 $("#message").attr("value",'');
          $('#chatlog').append('<div><p><b>You</b> :'+message+'</p></div><hr/>');
           $("#chatlog").scrollTop($("#chatlog")[0].scrollHeight);
-         $.post("includes/one-one/feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});  	 
+         $.post("includes/one-one/feedmessage.php",{'uid_from' :'<?php echo $uid; ?>','message':message,'uid_to':partner_uid});
+	 $.post("includes/one-one/bot.php",{'message':message,'uid':'<?php echo $uid; ?>'});
        }	
 });
   
@@ -176,3 +179,5 @@ $("#message").attr("value",'');
 </body>
 </head>
 </html>
+
+
