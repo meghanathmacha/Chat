@@ -32,13 +32,13 @@ return false;
 return false;
 }
 
-<<<<<<< HEAD
+
 public function gender($uid,$gender)
 {
 if($this->link)
 {
 $query="UPDATE users SET gender=$gender WHERE users.uid=$uid";
-=======
+
 public function typing($uid,$status)
 {
     
@@ -55,7 +55,7 @@ return false;
 }
 return false;
 }
-<<<<<<< HEAD
+
 public function getgender($uid)
 {
 if($this->link)
@@ -68,7 +68,6 @@ if(mysql_affected_rows()>0)
    $row=mysql_fetch_row($result);
    
 return $row['0'];
-=======
 
 public function getstatistics($uid)
 {
@@ -82,7 +81,7 @@ if(mysql_affected_rows()>0)
 $row=mysql_fetch_row($result);
 $statistics = explode(",", $row[0]);
 return $statistics;
->>>>>>> cbf772c3e630511cd80c9e85336f98881583248a
+
 }
 return false;
 }
