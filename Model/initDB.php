@@ -14,12 +14,6 @@ die("Mysql Connection Eror ".mysql_error());
 }
 
 }
-
-public function __destruct()
-{
-//mysql_close($this->link);
-}
-
 }
 
 ?>
